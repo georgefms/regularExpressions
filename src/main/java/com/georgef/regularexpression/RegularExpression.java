@@ -3,6 +3,7 @@ package com.georgef.regularexpression;
 import java.util.List;
 import validators.EmailValidator;
 import validators.NameValidator;
+import validators.PwValidator;
 
 /**
  *
@@ -54,6 +55,25 @@ public class RegularExpression {
             System.out.println("\nTestando: \"" + email + "\"");
             boolean valido = emailValidator.validate(email);
             System.out.println(valido ? "✅ Aceito" : "❌ Rejeitado");
+        }
+        
+        System.out.println("\n==== Testes de Senha ====");
+        PwValidator senhaValidator = new PwValidator();
+
+        List<String> senhas = List.of(
+            "F123456A",     // válido
+            "abcdefgH",     // sem número
+            "1234567T",     // válido
+            "ropsSoq0",     // válido
+            "F1234567A",    // 9 caracteres
+            "12345678",     // sem maiúscula
+            "abcdefgh"      // sem número nem maiúscula
+        );
+
+        for (String senha : senhas) {
+            System.out.println("\nTestando: \"" + senha + "\"");
+            boolean valido = senhaValidator.validar(senha);
+            System.out.println(valido ? "✅ Aceita" : "❌ Rejeitada");
         }
 
         // Repita essa lógica para senha, CPF e telefone depois que criarmos os respectivos validadores.
