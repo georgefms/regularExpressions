@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.georgef.regularexpression;
+import java.util.Scanner;
+import validators.NameValidator;
 
 /**
  *
@@ -11,6 +9,15 @@ package com.georgef.regularexpression;
 public class RegularExpression {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Scanner scan = new Scanner(System.in);
+        NameValidator validator = new NameValidator();
+        
+        System.out.print("Insira um nome: ");
+        String name = scan.nextLine();
+        if (validator.validate(name)){
+            System.out.println("Nome aceito");
+        } else {
+            System.out.println("Nome invalido");
+        }
     }
 }
