@@ -72,8 +72,8 @@ public class RegularExpression {
 
         for (String senha : senhas) {
             System.out.println("\nTestando: \"" + senha + "\"");
-            boolean valido = senhaValidator.validar(senha);
-            System.out.println(valido ? "✅ Aceita" : "❌ Rejeitada");
+            boolean valido = senhaValidator.validate(senha);
+            System.out.println(valido ? "✅Aceita" : "❌Rejeitada");
         }
 
         // Repita essa lógica para senha, CPF e telefone depois que criarmos os respectivos validadores.
