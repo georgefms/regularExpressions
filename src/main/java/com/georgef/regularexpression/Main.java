@@ -6,9 +6,11 @@ import test.Test;
  *
  * @author georgef
  */
-public class RegularExpression {
+public class Main {
 
     public static void main(String[] args) {
-        Test.runTest();
+        //Test.runTest();
+        Menu menu = new Menu();
+        menu.exibir();
    }
 }
