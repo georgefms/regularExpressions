@@ -41,7 +41,7 @@ public class Menu {
                 case 1 -> cadastrarUsuario();
                 case 2 -> listarUsuarios();
                 case 3 -> editarUsuario();
-                //case 4 -> removerUsuario();
+                case 4 -> removerUsuario();
                 case 0 -> System.out.println("Encerrando...");
                 default -> System.out.println("Opção inválida.");
             }
@@ -116,6 +116,27 @@ public class Menu {
                 System.out.println(u);
                 System.out.println("-------------------------");
             }
+        }
+        
+        private void removerUsuario() {
+            if (users.isEmpty()) {
+                System.out.println("Nenhum usuário para remover.");
+                return;
+            }
+
+            listarUsuariosComIndice();
+
+            System.out.print("Digite o número do usuário a remover: ");
+            int index = scanner.nextInt();
+            scanner.nextLine();
+
+            if (index < 0 || index >= users.size()) {
+                System.out.println("Índice inválido.");
+                return;
+            }
+
+            users.remove(index);
+            System.out.println("✅ Usuário removido com sucesso!");
         }
         
         private void listarUsuariosComIndice() {
