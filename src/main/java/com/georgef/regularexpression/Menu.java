@@ -1,9 +1,11 @@
 package com.georgef.regularexpression;
 import java.util.ArrayList ;
 import java.util.List ;
+import java.util.Map;
 import java.util.Scanner ;
 import models.User;
 import validators.*;
+import interfaces.Validator;
 /**
  *
  * @author georgef
@@ -14,11 +16,13 @@ public class Menu {
         private List<User> users = new ArrayList<>();
         private Scanner scanner = new Scanner(System.in);
 
-        private NameValidator nomeValidator = new NameValidator();
-        private EmailValidator emailValidator = new EmailValidator();
-        private PwValidator senhaValidator = new PwValidator();
-        private CpfValidator cpfValidator = new CpfValidator();
-        private PhoneNumValidator telefoneValidator = new PhoneNumValidator();
+        private final Map<String, Validator> validadores = Map.of(
+        "Nome", new NameValidator(),
+        "Email", new EmailValidator(),
+        "Senha", new PwValidator(),
+        "CPF", new CpfValidator(),
+        "Telefone", new PhoneNumValidator()
+    );
 
         public void exibir() {
             int opcao;
@@ -32,18 +36,11 @@ public class Menu {
                 scanner.nextLine(); // consumir quebra de linha
 
                 switch (opcao) {
-                    case 1:
-                        cadastrarUsuario();
-                        break;
-                    case 2:
-                        listarUsuarios();
-                        break;
-                    case 0:
-                        System.out.println("Encerrando...");
-                        break;
-                    default:
-                        System.out.println("Opção inválida.");
-                }
+                case 1 -> cadastrarUsuario();
+                case 2 -> listarUsuarios();
+                case 0 -> System.out.println("Encerrando...");
+                default -> System.out.println("Opção inválida.");
+            }
 
             } while (opcao != 0);
         }
@@ -51,38 +48,26 @@ public class Menu {
         private void cadastrarUsuario() {
             System.out.println("\n--- Cadastro de Usuário ---");
 
-            String nome = lerCampo("Nome", nomeValidator);
-            String email = lerCampo("Email", emailValidator);
-            String senha = lerCampo("Senha", senhaValidator);
-            String cpf = lerCampo("CPF", cpfValidator);
-            String telefone = lerCampo("Telefone", telefoneValidator);
+            String nome = lerCampo("Nome");
+            String email = lerCampo("Email");
+            String senha = lerCampo("Senha");
+            String cpf = lerCampo("CPF");
+            String telefone = lerCampo("Telefone");
 
             users.add(new User(nome, email, senha, cpf, telefone));
-            System.out.println("✅ Usuário cadastrado com sucesso!");
+        System.out.println("✅ Usuário cadastrado com sucesso!");
         }
 
-        private String lerCampo(String label, Object validator) {
+        private String lerCampo(String campo) {
             String entrada;
-            boolean valido;
+            Validator validador = validadores.get(campo);
+            if (validador == null) throw new IllegalArgumentException("Validador não encontrado: " + campo);
+
             do {
-                System.out.print(label + ": ");
+                System.out.print(campo + ": ");
                 entrada = scanner.nextLine();
+            } while (!validador.validate(entrada));
 
-                if (validator instanceof NameValidator) {
-                    valido = ((NameValidator) validator).validate(entrada);
-                } else if (validator instanceof EmailValidator) {
-                    valido = ((EmailValidator) validator).validate(entrada);
-                } else if (validator instanceof PwValidator) {
-                    valido = ((PwValidator) validator).validate(entrada);
-                } else if (validator instanceof CpfValidator) {
-                    valido = ((CpfValidator) validator).validate(entrada);
-                } else if (validator instanceof PhoneNumValidator) {
-                    valido = ((PhoneNumValidator) validator).validate(entrada);
-                } else {
-                    valido = false;
-                }
-
-            } while (!valido);
             return entrada;
         }
 
