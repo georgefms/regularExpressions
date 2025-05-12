@@ -39,7 +39,7 @@ java -cp out Main
  - Telefone: (91) 99999-9999
 
 ## 📁 Estrutura do Projeto
-
+```
  src/
  ├── Main.java
  ├── Menu.java
@@ -52,6 +52,14 @@ java -cp out Main
     ├── PwValidator.java
     ├── CpfValidator.java
     └── PhoneNumValidator.java
-
+```
 ## 📚 Relatório
 Este projeto foi desenvolvido como parte da disciplina de Teoria da Computação (UFPA), com entrega em formato de artigo técnico (modelo SBC).
+
+## 📦 Download
+
+[⬇️ Baixar versão .jar](https://github.com/georgefms/regularExpressions/releases/download/v1.0.0/regularExpression-1.0-SNAPSHOT.jar)
+
+[![Release](https://img.shields.io/github/v/release/georgefms/regularExpressions)](https://github.com/georgefms/regularExpressions/releases)
+
+
