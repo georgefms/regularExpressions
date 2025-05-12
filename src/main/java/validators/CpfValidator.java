@@ -1,4 +1,5 @@
 package validators;
+import interfaces.Validator;
 import java.util.regex.Pattern;
 
 /**
@@ -6,9 +7,10 @@ import java.util.regex.Pattern;
  * @author georgef
  */
 
-public class CpfValidator {
+public class CpfValidator implements Validator {
     private static final Pattern validationMask = Pattern.compile("^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$");
-
+    
+    @Override
     public boolean validate(String cpf) {
         boolean valid = validationMask.matcher(cpf).matches();
         if (!valid) {

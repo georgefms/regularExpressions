@@ -1,10 +1,11 @@
 package validators;
+import interfaces.Validator;
 import java.util.regex.Pattern;
 /**
  *
  * @author georgef
  */
-public class NameValidator {
+public class NameValidator implements Validator{
     //Mascara de validacao a ser aceita nos nomes.
     //Uma letra maiscula em cada parte
     //uma ou mais letras minusculas a seguir
@@ -12,6 +13,7 @@ public class NameValidator {
     //$ -> fim da string
     private static final Pattern validationMask = Pattern.compile("^[A-Z][a-z]+ [A-Z][a-z]+$");
     
+    @Override
     public boolean validate(String nome){
         boolean isValid = validationMask.matcher(nome).matches();
         if (!isValid) {

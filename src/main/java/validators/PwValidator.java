@@ -1,14 +1,16 @@
 package validators;
+import interfaces.Validator;
 import java.util.regex.Pattern;
 
 /**
  *
  * @author georgef
  */
-public class PwValidator {
+public class PwValidator implements Validator{
     // Regex para verificar se há exatamente 8 caracteres válidos (letras e números)
     private static final Pattern validationMask = Pattern.compile("^[a-zA-Z0-9]{8}$");
-
+    
+    @Override
     public boolean validate(String password) {
         boolean validFormat = validationMask.matcher(password).matches();
         boolean haveUpper = password.matches(".*[A-Z].*");

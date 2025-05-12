@@ -1,15 +1,17 @@
 package validators;
 
+import interfaces.Validator;
 import java.util.regex.Pattern;
 
 /**
  *
  * @author georgef
  */
-public class EmailValidator {
+public class EmailValidator implements Validator{
         private static final Pattern validationMask = Pattern.compile("^[a-z]+@[a-z]+\\.br$");
 
-    public boolean validate(String email){
+        @Override
+        public boolean validate(String email){
         boolean isValid = validationMask.matcher(email).matches();
         if (!isValid) {
             showError(email);

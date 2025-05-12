@@ -1,14 +1,16 @@
 package validators;
+import interfaces.Validator;
 import java.util.regex.Pattern;
 
 /**
  *
  * @author georgef
  */
-public class PhoneNumValidator {
+public class PhoneNumValidator implements Validator{
     // Aceita: (xx) 9xxxx-xxxx, (xx) 9xxxxxxxx, xx 9xxxxxxxx
     private static final Pattern validationMask = Pattern.compile("^(\\(\\d{2}\\)\\s?|\\d{2}\\s)9\\d{4}-?\\d{4}$");
-
+    
+    @Override
     public boolean validate(String phonenum) {
         boolean isValid = validationMask.matcher(phonenum).matches();
         if (!isValid) {
