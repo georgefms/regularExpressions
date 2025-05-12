@@ -30,6 +30,8 @@ public class Menu {
                 System.out.println("\n=== MENU ===");
                 System.out.println("1. Cadastrar novo usuário");
                 System.out.println("2. Listar usuários");
+                System.out.println("3. Editar usuário");
+                System.out.println("4. Remover usuário");
                 System.out.println("0. Sair");
                 System.out.print("Escolha: ");
                 opcao = scanner.nextInt();
@@ -38,6 +40,8 @@ public class Menu {
                 switch (opcao) {
                 case 1 -> cadastrarUsuario();
                 case 2 -> listarUsuarios();
+                case 3 -> editarUsuario();
+                //case 4 -> removerUsuario();
                 case 0 -> System.out.println("Encerrando...");
                 default -> System.out.println("Opção inválida.");
             }
@@ -70,6 +74,36 @@ public class Menu {
 
             return entrada;
         }
+        
+        private void editarUsuario() {
+            if (users.isEmpty()) {
+                System.out.println("Nenhum usuário para editar.");
+                return;
+            }
+
+            listarUsuariosComIndice();
+
+            System.out.print("Digite o número do usuário a editar: ");
+            int index = scanner.nextInt();
+            scanner.nextLine();
+
+            if (index < 0 || index >= users.size()) {
+                System.out.println("Índice inválido.");
+                return;
+            }
+
+            User usuario = users.get(index);
+            System.out.println("Editando usuário: " + usuario);
+
+            String nome = lerCampo("Nome");
+            String email = lerCampo("Email");
+            String senha = lerCampo("Senha");
+            String cpf = lerCampo("CPF");
+            String telefone = lerCampo("Telefone");
+
+            usuario.update(nome, email, senha, cpf, telefone);
+            System.out.println("✅ Usuário atualizado com sucesso!");
+        }
 
         private void listarUsuarios() {
             if (users.isEmpty()) {
@@ -81,6 +115,13 @@ public class Menu {
             for (User u : users) {
                 System.out.println(u);
                 System.out.println("-------------------------");
+            }
+        }
+        
+        private void listarUsuariosComIndice() {
+            System.out.println("\n--- Lista de Usuários ---");
+            for (int i = 0; i < users.size(); i++) {
+                System.out.printf("[%d] %s (%s)\n", i, users.get(i).getName(), users.get(i).getEmail());
             }
         }
 }
